@@ -1,0 +1,91 @@
+Metadata-Version: 2.1
+Name: 0x-contract-artifacts
+Version: 3.0.0
+Summary: 0x smart contract compilation artifacts
+Home-page: https://github.com/0xproject/0x-monorepo/tree/development/python-packages/contract_artifacts
+Author: F. Eugene Aumson
+Author-email: feuGeneA@users.noreply.github.com
+License: Apache 2.0
+Keywords: ethereum cryptocurrency 0x decentralized blockchain dex exchange
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Financial and Insurance Industry
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Office/Business :: Financial
+Classifier: Topic :: Other/Nonlisted Topic
+Classifier: Topic :: Security :: Cryptography
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Utilities
+Requires-Python: >=3.6, <4
+Description-Content-Type: text/markdown
+Requires-Dist: mypy-extensions
+Provides-Extra: dev
+Requires-Dist: bandit ; extra == 'dev'
+Requires-Dist: black ; extra == 'dev'
+Requires-Dist: coverage ; extra == 'dev'
+Requires-Dist: coveralls ; extra == 'dev'
+Requires-Dist: mypy ; extra == 'dev'
+Requires-Dist: mypy-extensions ; extra == 'dev'
+Requires-Dist: pycodestyle ; extra == 'dev'
+Requires-Dist: pydocstyle ; extra == 'dev'
+Requires-Dist: pylint ; extra == 'dev'
+Requires-Dist: pytest ; extra == 'dev'
+Requires-Dist: sphinx ; extra == 'dev'
+Requires-Dist: tox ; extra == 'dev'
+Requires-Dist: twine ; extra == 'dev'
+
+## 0x-contract-artifacts
+
+0x smart contract compilation artifacts
+
+Read the [documentation](http://0x-contract-artifacts-py.s3-website-us-east-1.amazonaws.com/)
+
+## Installing
+
+```bash
+pip install 0x-contract-artifacts
+```
+
+## Contributing
+
+We welcome improvements and fixes from the wider community! To report bugs within this package, please create an issue in this repository.
+
+Please read our [contribution guidelines](../../CONTRIBUTING.md) before getting started.
+
+### Pull in artifacts from TypeScript build environment
+
+```bash
+./setup.py pre_install
+```
+
+### Install Code and Dependencies
+
+```bash
+pip install -e .[dev]
+```
+
+### Clean
+
+`./setup.py clean --all`
+
+### Lint
+
+`./setup.py lint`
+
+### Build Documentation
+
+`./setup.py build_sphinx`
+
+### More
+
+See `./setup.py --help-commands` for more info.
+
+

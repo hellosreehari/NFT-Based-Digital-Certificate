@@ -1,0 +1,81 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <h1>Apply for Masters</h1>
+    <p>Eligibity Criteria: Minimum 8.0 CGPA</p>
+    <head>
+        <script src="https://npmcdn.com/moralis@0.0.35/dist/moralis.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+    <div class="d-flex p-2">
+        <input type="text" id="input-search" class="form-control" placeholder="Student ID"><button id="search-button" class="btn btn-dark">Apply</button>
+    </div>
+        <div id="content"></div>
+        <script>
+            let button = document.querySelector('#search-button');
+            let input = document.querySelector('#input-search')
+            async function getData() {
+                getNFTs()
+            }
+            button.onclick = getData;
+            input.addEventListener('keyup', function (e) {
+                var code = (e.keyCode ? e.keyCode : e.which);
+                if (code == 13) {
+                    getData();
+                }
+            })
+            Moralis.initialize("SERVER_ID_HERE"); //server id
+            Moralis.serverURL = "SERVER_URL_HERE";//server url
+            async function getNFTs() {
+    
+                var wallet_address = document.getElementById("input-search").value;
+                console.log(wallet_address);
+                const options = { chain: 'matic', address: wallet_address }
+                const nfts = await Moralis.Web3.getNFTs(options);
+                console.log(nfts);
+                nfts.forEach(function (nft) {
+                    let url = fixURL(nft.token_uri);
+                    fetch(url)
+                        .then(response => response.json())
+                        .then(data => {
+                            var certificate = data.name;
+                            console.log(certificate);
+                            var mycgpa = parseFloat(data.properties.cgpa);
+                            console.log(mycgpa);
+                            console.log(typeof(certificate));
+                            console.log(typeof(mycgpa));
+                            if(certificate=='BE')
+                            {
+                                if(mycgpa>=8.0)
+                                {
+                                    $("#content").html($("#content").html() + '<div class="alert alert-success" role="alert">Hello <b>'+ data.properties.student_name+'</b>, your CGPA is <b>'+ data.properties.cgpa + "</b>, You are <b>ELIGIBLE</b> to apply !</div>");
+                                }
+                                else
+                                {
+                                    $("#content").html($("#content").html() + '<div class="alert alert-danger" role="alert">Hello <b>'+ data.properties.student_name +'</b>, your CGPA is <b>'+ data.properties.cgpa + "</b>, You are <b>NOT ELIGIBLE</b> to apply !</div>");
+                                }
+                            }
+                        });
+    
+                })
+            }
+            function fixURL(url) {
+                if (url.startsWith("ipfs")) {
+                    return "https://ipfs.moralis.io:2053/ipfs/" + url.split("ipfs://ipfs/").slice(-1)[0];
+                }
+                else {
+                    return url + "?format=json"
+                }
+            }
+            function fixURL2(url) {
+                if (url.startsWith("ipfs")) {
+                    return "https://ipfs.moralis.io:2053/ipfs/" + url.split("ipfs://").slice(-1)[0];
+                }
+                else
+                {
+                    return url;
+                }
+            }
+        </script>
+{% endblock %}
