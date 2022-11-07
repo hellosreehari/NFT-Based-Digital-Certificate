@@ -1,5 +1,5 @@
 # NFT-Based-Digital-Certificate
-Issuing Digital Certificates as NFT for easy access and authorization
+Issuing Digital Certificates as NFT for easy access and authorisation
 
 Step 1 : Create NFT Collection from ThirdWeb.com
 
